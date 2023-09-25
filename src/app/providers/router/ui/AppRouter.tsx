@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { Route, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
 import { routeConfig } from 'shared/config/routeConfig/routeConfig';
