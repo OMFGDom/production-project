@@ -41,7 +41,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'i18next/no-literal-string': [
       'error',
-      { markupOnly: true, ignoreAttribute: ['stroke'] },
+      { markupOnly: true, ignoreAttribute: ['stroke', 'data-testid'] },
     ],
     'react/jsx-uses-vars': 'error',
     'max-len': [
@@ -63,4 +63,12 @@ module.exports = {
       version: 'detect',
     },
   },
+  overrides: [
+    {
+      files: ['**/src/**/*.test.ts', '**/src/**/*.test.tsx'],
+      rules: {
+        'i18next/no-literal-string': 'off',
+      },
+    },
+  ],
 };
