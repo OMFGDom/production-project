@@ -44,6 +44,16 @@ module.exports = {
       { markupOnly: true, ignoreAttribute: ['stroke'] },
     ],
     'react/jsx-uses-vars': 'error',
+    'max-len': [
+      'error',
+      {
+        code: 120,
+        ignoreComments: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
+      },
+    ],
   },
   globals: {
     __IS_DEV__: true,
