@@ -1,12 +1,12 @@
-import { Sidebar } from "./Sidebar"
-import { fireEvent, screen } from "@testing-library/react"
-import { renderWithTranslation } from "shared/lib/tests/renderWithTranslation/renderWithTranslation";
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithTranslation } from 'shared/lib/tests/renderWithTranslation/renderWithTranslation';
+import { Sidebar } from './Sidebar';
 
 describe('classNames', () => {
   test('with only one param', () => {
     renderWithTranslation(<Sidebar />);
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-  })
+  });
 
   test('test toogle', () => {
     renderWithTranslation(<Sidebar />);
@@ -14,5 +14,5 @@ describe('classNames', () => {
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
     fireEvent.click(toogleBtn);
     expect(screen.getByTestId('sidebar')).toHaveClass('collapsed');
-  })
-})
+  });
+});

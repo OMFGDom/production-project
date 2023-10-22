@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error , errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // You can also log the error to an error reporting service
     console.log(error, errorInfo);
   }
@@ -30,10 +30,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     const { children } = this.props;
     if (hasError) {
       // You can render any custom fallback UI
-      return ( <Suspense fallback=""><PageError /></Suspense> );
+      return (<Suspense fallback=""><PageError /></Suspense>);
     }
 
-    return children; 
+    return children;
   }
 }
 
