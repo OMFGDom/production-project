@@ -49,6 +49,7 @@ module.exports = {
         ignoreRegExpLiterals: true,
       },
     ],
+    'linebreak-style': 'off'
   },
   globals: {
     __IS_DEV__: true,
