@@ -2,27 +2,31 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
+    jest: true
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:i18next/recommended', 'plugin:storybook/recommended'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:i18next/recommended',
+    'plugin:storybook/recommended'
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: './tsconfig.json'
   },
-  plugins: ['react', '@typescript-eslint', 'i18next'],
+  plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
   rules: {
     'react/jsx-indent': [1, 2],
     'react/jsx-indent-props': [1, 2],
     indent: [1, 2],
-    'react/jsx-filename-extension': [
-      2,
-      { extensions: ['.js', '.jsx', '.tsx'] },
-    ],
+    'comma-dangle': ['error', 'never'],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'warn',
@@ -34,10 +38,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
-    'i18next/no-literal-string': [
-      'error',
-      { markupOnly: true, ignoreAttribute: ['stroke', 'data-testid', 'to'] },
-    ],
+    'i18next/no-literal-string': ['error', { markupOnly: true, ignoreAttribute: ['stroke', 'data-testid', 'to'] }],
     'react/jsx-uses-vars': 'error',
     'max-len': [
       'error',
@@ -46,25 +47,31 @@ module.exports = {
         ignoreComments: true,
         ignoreStrings: true,
         ignoreTemplateLiterals: true,
-        ignoreRegExpLiterals: true,
-      },
+        ignoreRegExpLiterals: true
+      }
     ],
-    'linebreak-style': 'off'
+    'linebreak-style': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+    'object-curly-newline': 'off',
+    'implicit-arrow-linebreak': 'off'
   },
   globals: {
-    __IS_DEV__: true,
+    __IS_DEV__: true
   },
   settings: {
     react: {
-      version: 'detect',
-    },
+      version: 'detect'
+    }
   },
   overrides: [
     {
-      files: ['**/src/**/*.test.ts', '**/src/**/*.test.tsx'],
+      files: ['**/src/**/*.{test,stories}.{ts,tsx}'],
       rules: {
-        'i18next/no-literal-string': 'off',
-      },
-    },
-  ],
+        'i18next/no-literal-string': 'off'
+      }
+    }
+  ]
 };
