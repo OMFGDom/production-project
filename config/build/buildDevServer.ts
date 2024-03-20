@@ -8,7 +8,7 @@ export function buildDevServer(options: BuildOptions): DevServerConfigyration {
     historyApiFallback: true,
     hot: true,
     client: {
-      overlay: false,
-    },
+      overlay: false
+    }
   };
 }
