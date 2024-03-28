@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { buildCssLoaders } from './loaders/buildCssLoader';
+import { buildCssLoader } from './loaders/buildCssLoader';
 import { BuildOptions } from './types/config';
 
 export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
@@ -8,7 +8,7 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     use: ['@svgr/webpack']
   };
 
-  const cssLoader = buildCssLoaders(isDev);
+  const cssLoader = buildCssLoader(isDev);
 
   // Если не используем ts-loader, то можно использовать babel-loader
   const typescriptLoader: webpack.RuleSetRule = {

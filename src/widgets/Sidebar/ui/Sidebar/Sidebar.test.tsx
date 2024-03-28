@@ -3,7 +3,7 @@ import { componentRender } from 'shared/lib/tests/componentRender/componentRende
 import { Sidebar } from './Sidebar';
 
 describe('classNames', () => {
-  test('with only one param', () => {
+  test('with only first param', () => {
     componentRender(<Sidebar />);
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
   });

@@ -1,45 +1,43 @@
-import _ from 'lodash'; // Consider adding lodash for deep cloning
 import path from 'path';
-import webpack, { RuleSetRule } from 'webpack';
-import { buildCssLoaders } from '../build/loaders/buildCssLoader';
+import webpack, { DefinePlugin, RuleSetRule } from 'webpack';
+import { buildCssLoader } from '../build/loaders/buildCssLoader';
 import { BuildPaths } from '../build/types/config';
 
 export default ({ config }: { config: webpack.Configuration }) => {
   const paths: BuildPaths = {
     build: '',
-    src: path.resolve(__dirname, '..', '..', 'src'),
+    html: '',
     entry: '',
-    html: ''
+    src: path.resolve(__dirname, '..', '..', 'src')
+  };
+  config.resolve.modules.push(paths.src);
+  config.resolve.extensions.push('.ts', '.tsx');
+
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    entities: path.resolve(paths.src, 'entities')
   };
 
-  const newConfig = _.cloneDeep(config); // Deep clone the config
+  // eslint-disable-next-line no-param-reassign
+  config.module.rules = config.module.rules.map((rule: RuleSetRule) => {
+    if (/svg/.test(rule.test as string)) {
+      return { ...rule, exclude: /\.svg$/i };
+    }
 
-  newConfig.resolve = newConfig.resolve || {};
-  newConfig.resolve.modules = newConfig.resolve.modules || [];
-  newConfig.resolve.modules.push(paths.src);
+    return rule;
+  });
 
-  newConfig.resolve.extensions = newConfig.resolve.extensions || [];
-  newConfig.resolve.extensions.push('.ts', '.tsx');
+  config.module.rules.push({
+    test: /\.svg$/,
+    use: ['@svgr/webpack']
+  });
+  config.module.rules.push(buildCssLoader(true));
 
-  if (newConfig.module) {
-    // eslint-disable-next-line operator-linebreak
-    newConfig.module.rules =
-      (newConfig.module?.rules?.map((rule) => {
-        if (typeof rule === 'object' && rule !== null && 'test' in rule) {
-          if (/svg/.test(rule.test as string)) {
-            return { ...rule, exclude: /\.svg$/i };
-          }
-        }
-        return rule;
-      }) as RuleSetRule[]) || [];
+  config.plugins.push(
+    new DefinePlugin({
+      __IS_DEV__: true
+    })
+  );
 
-    newConfig.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack']
-    });
-
-    newConfig.module.rules.push(buildCssLoaders(true));
-  }
-
-  return newConfig;
+  return config;
 };
